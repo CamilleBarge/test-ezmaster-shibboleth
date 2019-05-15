@@ -5,6 +5,11 @@ RUN apt-get update \
   && apt-get -y install apache2=2.4.10-10+deb8u14 libapache2-mod-shib2=2.5.3+dfsg-2+deb8u1 \
   && apt-get clean
 
+
+COPY config.json /
+RUN mkdir -p /ezdata
+
+
 RUN a2enmod ssl shib2 proxy_http
 RUN a2dissite 000-default
 RUN a2ensite default-ssl
@@ -27,12 +32,6 @@ CMD [ "httpd-foreground" ]
 
 # ezmasterization of ezmaster-redis
 # see https://github.com/CamilleBarge/test-ezmaster-redis/
-
-
-# redis data folder dedicated to ezmaster
-# because it's not yet (8 nov 2017) possible to UNVOLUME /data/db and /data/configdb
-RUN mkdir -p /ezdata
-
 
 
 
