@@ -1,8 +1,8 @@
 FROM debian:jessie
 
 RUN apt-get update \
-  #&& apt-get -y install apache2=2.4.10-10+deb8u4 libapache2-mod-shib2=2.5.3+dfsg-2 \
-  && apt-get -y install apache2 libapache2-mod-shib2=2.5.3+dfsg-2 \
+  ## https://packages.debian.org/fr/jessie/libs/ => shibboleth-sp2-common
+  && apt-get -y install apache2=2.4.10-10+deb8u14 libapache2-mod-shib2=2.5.3+dfsg-2+deb8u1 \
   && apt-get clean
 
 RUN a2enmod ssl shib2 proxy_http
